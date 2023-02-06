@@ -23,9 +23,11 @@ app.get("/", function (req, res) {
 });
 
 app.get("/test", function (req, res) {
-  res.json({
-    message: "Successful Try",
-  });
+  res.json([
+    {
+      message: "Successful Try",
+    },
+  ]);
 });
 
 app.listen(3000, function () {
