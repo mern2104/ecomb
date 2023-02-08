@@ -1,8 +1,11 @@
 const express = require("express");
 const _ = express.Router();
 
-_.get("/registration", (req, res) => {
-  res.send("Ami Api Route");
+// registration
+_.post("/registration", (req, res) => {
+  let { email, name } = req.body;
+
+  res.json({ email, name });
 });
 
 module.exports = _;
