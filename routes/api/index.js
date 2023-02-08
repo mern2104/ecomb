@@ -1,8 +1,8 @@
 const express = require("express");
 const _ = express.Router();
+const authRoutes = require("./auth");
 
-_.get("/registration", (req, res) => {
-  res.send("Ami Api Route");
-});
+// auth routes
+_.use("/auth", authRoutes);
 
 module.exports = _;
