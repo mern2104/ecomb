@@ -1,9 +1,10 @@
 const express = require("express");
 const _ = express.Router();
+const User = require("../../models/user.js");
 
 // registration
 _.post("/registration", (req, res) => {
-  let { email, fullname, password, isSubscribe } = req.body;
+  let { email, phoneNumber, firstName, lastName, password } = req.body;
 
   if (!email) {
     return res.json({ error: "You must enter an email address" });
@@ -16,7 +17,17 @@ _.post("/registration", (req, res) => {
     return res.json({ error: "You must enter an password" });
   }
 
-  res.json({ email, fullname, password, isSubscribe });
+  const user = new User({
+    email,
+    phoneNumber,
+    firstName,
+    lastName,
+    password,
+  });
+
+  user.save();
+
+  res.json(user);
 });
 
 module.exports = _;

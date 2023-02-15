@@ -21,6 +21,10 @@ const userSchema = new Schema({
     type: String,
     require: true,
   },
+  verified:{
+    type: String,
+    default: false
+  },
   merchant: {
     type: Schema.Types.ObjectId,
     ref: "Merchant",
