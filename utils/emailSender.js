@@ -5,7 +5,7 @@ exports.sendVerificationEmail = (email, name, url) => {
     service: "gmail",
     auth: {
       user: process.env.EMAIL,
-      pass: qprykxlicektqxiv,
+      pass: "qprykxlicektqxiv",
     },
   });
 
@@ -13,12 +13,13 @@ exports.sendVerificationEmail = (email, name, url) => {
     from: process.env.EMAIL, // sender address
     to: email, // list of receivers
     subject: "Oreby Ecommerce Verification Link", // Subject line
-    text: "Hello world?", // plain text body
+    text: `Hello ${name}`, // plain text body
     html: `<b>${url}</b>`, // html body
   };
 
   transporter.sendMail(info, (err, res) => {
     if (err) return err;
+    
     return res;
   });
 };
