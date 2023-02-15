@@ -1,7 +1,10 @@
 const express = require("express");
 const _ = express.Router();
 const User = require("../../models/user.js");
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
+const { sendVerificationEmail } = require("../../utils/emailSender.js");
+
+
 // registration
 _.post("/registration", (req, res) => {
   let { email, phoneNumber, firstName, lastName, password } = req.body;
@@ -32,9 +35,15 @@ _.post("/registration", (req, res) => {
 
   user.save();
 
-  let token = jwt.sign(user.email, ">@H%rH@>MDW(N72", { expiresIn: "1h" });
+  let username = user.firstName+user.lastName
 
-  res.json(token);
+  let token = jwt.sign({ email: user.email }, ">@H%rH@>MDW(N72", {
+    expiresIn: "1h",
+  });
+
+  sendVerificationEmail(user.email,username,token)
+
+  res.json(user);
 });
 
 module.exports = _;
